@@ -15,33 +15,37 @@ raw_data = {'regiment': ['Nighthawks', 'Nighthawks', 'Nighthawks', 'Nighthawks',
             'origin': ['Arizona', 'California', 'Texas', 'Florida', 'Maine', 'Iowa', 'Alaska', 'Washington', 'Oregon', 'Wyoming', 'Louisana', 'Georgia']}
 # Step 3. Create a dataframe and assign it to a variable called army.
 # Don't forget to include the columns names in the order presented in the dictionary ('regiment', 'company', 'deaths'...) so that the column index order is consistent with the solutions. If omitted, pandas will order the columns alphabetically.
-
+army = pd.DataFrame(raw_data, columns=raw_data.keys())
+army.head()
 # Step 4. Set the 'origin' colum as the index of the dataframe
-
+army = army.set_index('origin')
+army.head()
 # Step 5. Print only the column veterans
-
+army.loc[:,['veterans']].head()
 # Step 6. Print the columns 'veterans' and 'deaths'
-
+army.loc[:,['veterans','deaths']].head()
 # Step 7. Print the name of all the columns.
-
+for col in army.columns:
+    print(col)
 # Step 8. Select the 'deaths', 'size' and 'deserters' columns from Maine and Alaska
-
+army.loc[['Maine','Alaska'],['deaths','size','deserters']]
 # Step 9. Select the rows 3 to 7 and the columns 3 to 6
-
+army.iloc[3:8,3:7]
 # Step 10. Select every row after the fourth row and all columns
-
+army.iloc[4:,:]
 # Step 11. Select every row up to the 4th row and all columns
-
+army.iloc[:4,:]
 # Step 12. Select the 3rd column up to the 7th column
-
+army.iloc[:,2:7]
 # Step 13. Select rows where df.deaths is greater than 50
-
+army[army['deaths']>50]
 # Step 14. Select rows where df.deaths is greater than 500 or less than 50
-
+army[(army['deaths']>500) | (army['deaths']<50)]
 # Step 15. Select all the regiments not named "Dragoons"
-
+army[(army['regiment'] != 'Dragoons')]
 # Step 16. Select the rows called Texas and Arizona
-
+army.loc[['Texas','Arizona'],:]
 # Step 17. Select the third cell in the row named Arizona
-
+army.loc[['Arizona'],:].iloc[:,[2]]
 # Step 18. Select the third cell down in the column named deaths
+army.iloc[[2],:].loc[:,['deaths']]
